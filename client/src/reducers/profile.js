@@ -1,5 +1,6 @@
 import {
     GET_PROFILE,
+    GET_PROFILES,
     PROFILE_ERROR,
     CLEAR_PROFILE,
     UPDATE_PROFILE,
