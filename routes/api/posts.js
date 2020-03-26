@@ -126,36 +126,36 @@ router.put('/like/:id', auth, async (req, res) => {
 // @route   POST api/posts/:id/comment
 // @desc    Post a comment
 // @access  Private
-router.post('/:id/comment', [auth, [check('text', 'Content is required').not().isEmpty()]], async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        console.log(errors);
-        return res.json({ errors: errors.array() });
-    }
+// router.post('/:id/comment', [auth, [check('text', 'Content is required').not().isEmpty()]], async (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//         console.log(errors);
+//         return res.json({ errors: errors.array() });
+//     }
 
-    try {
-        const post = await Post.findById(req.params.id);
-        if (!post) {
-            return res.status(404).json({ msg:'Post not found' });
-        }
-        const user = await User.findById(req.user.id).select('-password');
-        const newComment = {
-            text: req.body.text,
-            user: req.user.id,
-            name: user.name,
-            avatar: user.avatar
-        }
+//     try {
+//         const post = await Post.findById(req.params.id);
+//         if (!post) {
+//             return res.status(404).json({ msg:'Post not found' });
+//         }
+//         const user = await User.findById(req.user.id).select('-password');
+//         const newComment = {
+//             text: req.body.text,
+//             user: req.user.id,
+//             name: user.name,
+//             avatar: user.avatar
+//         }
 
-        post.comments.push(newComment);
+//         post.comments.push(newComment);
         
-        await post.save();
+//         await post.save();
 
-        return res.json(post.comments);
-    } catch (err) {
-        console.error(err);
-        return res.status(500).send('Server Error!')
-    }
-});
+//         return res.json(post.comments);
+//     } catch (err) {
+//         console.error(err);
+//         return res.status(500).send('Server Error!')
+//     }
+// });
 
 // @route   POST api/posts/:id/comment
 // @desc    Post a comment
@@ -213,6 +213,9 @@ router.delete('/:id/comment/:comment_id', auth, async (req, res) => {
         return res.json(post.comments);
     } catch (err) {
         console.error(err);
+        if (err.kind === 'ObjectId') {
+            return res.status(404).json({ msg: 'Comment not found' });
+        }
         return res.status(500).send('Server Error!')
     }
 });
