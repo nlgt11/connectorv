@@ -27,7 +27,7 @@ const Profile = ({ match, profile: { profile, loading }, auth, getProfileById })
             )}
             <div className="profile-grid my-1">
                 {profile !== null && (
-                    <Fragment className="profile-grid my-1">
+                    <div className="profile-grid my-1">
                         <ProfileTop profile={profile} />
                         <ProfileAbout profile={profile} />
                         <ProfileAbout profile={profile} />
@@ -61,7 +61,7 @@ const Profile = ({ match, profile: { profile, loading }, auth, getProfileById })
                         {profile.githubusername && (
                             <ProfileGithub username={profile.githubusername} />
                         )}
-                    </Fragment>
+                    </div>
                 )}
             </div>
         </Fragment>
