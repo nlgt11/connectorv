@@ -13,6 +13,7 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
         <div className="profile-github">
             <h2 className="text-primary my-1">Github Repos</h2>
             {repos === null ? <Spinner /> : (
+                repos.length === 0 ? (<p>No repo found</p>) :
                 repos.map(repo => (
                     <div key={repo._id} className="repo bg-white p-1 my-1">
                         <div>
@@ -21,9 +22,9 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
                                     {repo.name}
                                 </a>
                             </h4>
-                            <p>{repo.description}</p>
+                            <p className="hide-sm">{repo.description}</p>
                         </div>
-                        <div>
+                        <div className="hide-sm">
                             <ul>
                                 <li className="badge badge-primary">
                                     Stars: {repo.stargazers_count}

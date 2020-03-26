@@ -17,11 +17,11 @@ const Profile = ({ match, profile: { profile, loading }, auth, getProfileById })
 
     return (
         <Fragment>
-            {profile === null || loading ? <Spinner /> : (
+            {profile === null ? <Spinner /> : (
                 <Fragment>
-                    <Link to='/profiles' className='btn btn-light'>Go to Profiles</Link>
+                    <Link to='/profiles' className='btn btn-light'>Go back</Link>
                     {auth.isAuthenticated && !auth.loading &&  auth.user._id === profile.user._id && (
-                        <Link className='btn btn-dark' to='/edit-profile'>Edit Profile</Link>
+                        <Link className='btn btn-dark' to='/dashboard'>Edit Profile</Link>
                     )}
                 </Fragment>
             )}
@@ -42,7 +42,7 @@ const Profile = ({ match, profile: { profile, loading }, auth, getProfileById })
                                         />
                                     ))}
                                 </Fragment>
-                            ) : (<h4>No experience credentials</h4>)}
+                            ) : (<h4>Not updated credentials yet</h4>)}
                         </div>
                         <div className="profile-edu bg-white p-2">
                             <h2 className="text-primary">Education</h2>
@@ -55,7 +55,7 @@ const Profile = ({ match, profile: { profile, loading }, auth, getProfileById })
                                         />
                                     ))}
                                 </Fragment>
-                            ) : (<h4>No experience credentials</h4>)}
+                            ) : (<h4>Not updated credentials yet</h4>)}
                         </div>
 
                         {profile.githubusername && (

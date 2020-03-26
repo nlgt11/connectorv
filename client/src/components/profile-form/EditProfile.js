@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentProfile } from '../../action/profile';
 
-const EditProfile = ({ profile: { profile, loading } , getCurrentProfile, createProfile, history }) => {
+const EditProfile = ({ profile: { profile, loading }, createProfile, history }) => {
     const [formData, setFormData] = useState({
         company: '',
         website: '',
@@ -69,12 +69,8 @@ const EditProfile = ({ profile: { profile, loading } , getCurrentProfile, create
     return (
         <Fragment>
             <h1 className="large text-primary">
-                Create Your Profile
+                Edit Your Profile
             </h1>
-            <p className="lead">
-                <i className="fas fa-user"></i> Let's get some information to make your
-                profile stand out
-            </p>
             <small>* = required field</small>
             <form className="form" onSubmit={e => onSubmit(e)}>
                 <div className="form-group">
@@ -165,9 +161,7 @@ const EditProfile = ({ profile: { profile, loading } , getCurrentProfile, create
 
 EditProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
-    getCurrentProfile: PropTypes.func.isRequired,
     profile: PropTypes.object,
-    auth: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
